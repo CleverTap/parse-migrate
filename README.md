@@ -1,14 +1,14 @@
 ## Migrate Your Push Notifications from Parse to CleverTap
 
-### Sign up
+### Sign up for CleverTap
 
-[Sign up](https://clevertap.com/sign-up/)
+[Sign up here](https://clevertap.com/sign-up/).  It's free, no credit card required.
 
 ### Import your Parse users
 
 [Click here to automatically import your Parse users](https://dashboard.clevertap.com/x/import/parse.html) from your CleverTap dashboard.
 
-## Add CleverTap to your app
+### Add CleverTap to your app
 
 * [iOS integration guide](https://support.clevertap.com/integration/ios-sdk/)  
 
@@ -17,7 +17,7 @@
 * [Server API guide](https://support.clevertap.com/server/overview/)  
 
 
-### Maintaining Continuity of Users During the Transition
+#### Maintaining Continuity of Users During the Transition
 
 When your import your Parse users into CleverTap, a CleverTap user profile will be created for each of your Parse users.  Those profiles will include the corresponding push tokens and channel values (and other custom property values) from your Parse user.
 
@@ -41,13 +41,13 @@ The default with Parse was to collect Android GCM tokens using the Parse GCM Sen
 
 Please refer to our [Android Push Notification guide](https://support.clevertap.com/integration/android-sdk/#handling-multiple-push-notification-providers) for more information.
 
-### Managing Channels
+#### Managing Channels
 
 Your users' current Parse channels will be imported and sync'd to the corresponding CleverTap user profile and will be available to your client-side code.
 
-#### Android
+##### Android
 
-##### Accessing Channels
+###### Accessing Channels
 
 ```java
 clevertap = CleverTapAPI.getInstance(getApplicationContext());
@@ -63,7 +63,7 @@ if (channels != null) {
 }
 ```
 
-##### Adding or Removing Channels
+###### Adding or Removing Channels
 
 ```java
 clevertap = CleverTapAPI.getInstance(getApplicationContext());
@@ -76,9 +76,9 @@ clevertap = CleverTapAPI.getInstance(getApplicationContext());
 clevertap.profile.removeMultiValueForKey("channels", "yankees");
 ```
 
-#### iOS
+##### iOS
 
-##### Accessing Channels
+###### Accessing Channels
 
 ```objc
 NSArray *channels = [[CleverTap sharedInstance] profileGet:@"channels"];
@@ -89,7 +89,7 @@ if (channels && [channels isKindOfClass:[NSArray class]]) {
 }
 ```
 
-##### Adding or Removing Channels
+###### Adding or Removing Channels
 
 ```objc
 [[CleverTap sharedInstance] profileAddMultiValue:@"yankees" forKey:@"channels"];
@@ -101,13 +101,13 @@ if (channels && [channels isKindOfClass:[NSArray class]]) {
 {% endhighlight %}
 ```
 
-### Sending Push Notifications
+#### Sending Push Notifications
 
-#### From the CleverTap Dashboard
+##### From the CleverTap Dashboard
 
 You can create and manage push notification campaigns directly in your [CleverTap Dashboard->Campaigns->Push](https://dashboard.clevertap.com/x/push/notification.html).  
 
-#### Via the CleverTap Server API.  
+##### Via the CleverTap Server API.  
 
 [Learn more about the CleverTap Server API here](https://support.clevertap.com/server/overview/).
 
@@ -179,7 +179,7 @@ Endpoint: https://api.clevertap.com/1/targets/create.json
 ```
 [
 
-#### From Cloud Code
+##### From Cloud Code
 
 If you are running your own instance of [parse-server](https://github.com/ParsePlatform/parse-server), you can use the CleverTap Node.js module to send push notifications.  Please [see our fork of the parse-server-example server](https://github.com/CleverTap/parse-server-example) for more details and usage. 
 
