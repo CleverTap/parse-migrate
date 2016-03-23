@@ -136,8 +136,8 @@ Endpoint: https://api.clevertap.com/1/targets/create.json
         }
     },
     "content":{
-        "title": "Hi!",
-        "body": "How are you doing today?",
+        "title": "Breaking News",
+        "body": "Yankees Win 5-4",
         "platform_specific": {
             "ios": {
                 "deep_link": "example.com",
@@ -182,7 +182,7 @@ If you are running your own instance of [parse-server](https://github.com/ParseP
 
 * install the CleverTap Node module: `npm install --save clevertap`
 
-* add your CleverTap Account ID and CleverTap Account Passcode (you can find these in [CleverTap Dashboard->Settings](https://dashboard.clevertap.com/x/settings.html) as environment variables (CLEVERTAP_ACCOUNT_ID and CLEVERTAP_ACCOUNT_PASSCODE, respectively).  
+* add your CleverTap Account ID and CleverTap Account Passcode (you can find these in [CleverTap Dashboard->Settings](https://dashboard.clevertap.com/x/settings.html)) as environment variables (CLEVERTAP_ACCOUNT_ID and CLEVERTAP_ACCOUNT_PASSCODE, respectively).  
 
 You can then enable CleverTap in your Cloud Code ([see our example cloud/main.js implementation](https://github.com/CleverTap/parse-server-example/blob/master/cloud/main.js)) to send push like this, for example:
 
