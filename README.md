@@ -92,12 +92,10 @@ if (channels && [channels isKindOfClass:[NSArray class]]) {
 
 ```objc
 [[CleverTap sharedInstance] profileAddMultiValue:@"yankees" forKey:@"channels"];
-{% endhighlight %}
 ```
 
 ```objc
 [[CleverTap sharedInstance] profileRemoveMultiValue:@"mets" forKey:@"channels"];
-{% endhighlight %}
 ```
 
 #### Sending Push Notifications
