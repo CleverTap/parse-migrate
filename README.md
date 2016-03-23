@@ -6,7 +6,7 @@
 
 ### Import your Parse users
 
-[Click here to automatically import your Parse users](https://dashboard.clevertap.com/x/import/parse.html) from your CleverTap dashboard.
+[Automatically import your Parse users](https://dashboard.clevertap.com/x/import/parse.html) from your CleverTap dashboard.
 
 ### Add CleverTap to your app
 
@@ -19,7 +19,7 @@
 
 #### Maintaining Continuity of Users During the Transition
 
-When your import your Parse users into CleverTap, a CleverTap user profile will be created for each of your Parse users.  Those profiles will include the corresponding push tokens and channel values (and other custom property values) from your Parse user.
+When you import your Parse users into CleverTap, a CleverTap user profile will be created for each of your Parse users.  Those profiles will include the corresponding push tokens and channel values (and other custom property values) from your Parse user.
 
 Our SDK will be able to match the imported CleverTap user profile with a device user via the Parse Installation Id.  To enable this matching, you must add the following flag to your Info.plist/AndroidManifest.xml file when integrating the relevant CleverTap SDK.
 
@@ -68,7 +68,6 @@ if (channels != null) {
 ```java
 clevertap = CleverTapAPI.getInstance(getApplicationContext());
 clevertap.profile.addMultiValueForKey("channels", "mets");
-{% endhighlight %}
 ```
 
 ```java
