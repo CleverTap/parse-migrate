@@ -104,7 +104,7 @@ if (channels && [channels isKindOfClass:[NSArray class]]) {
 
 You can create and manage push notification campaigns directly in your [CleverTap Dashboard->Campaigns->Push](https://dashboard.clevertap.com/x/push/notification.html).  
 
-##### Via the CleverTap Server API.  
+##### Via the CleverTap Server API    
 
 [Learn more about the CleverTap Server API here](https://support.clevertap.com/server/overview/).
 
