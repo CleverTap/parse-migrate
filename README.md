@@ -115,8 +115,8 @@ Endpoint: https://api.clevertap.com/1/targets/create.json
 **Sample Request**  
 
     curl -H "Content-Type:application/json"
-         -H "X-CleverTap-Account-ID:xxx-xxx-xxx"
-         -H "X-CleverTap-Passcode:xxx-xxx-xxx"
+         -H "X-CleverTap-Account-ID: Your CleverTap Account ID"
+         -H "X-CleverTap-Passcode: Your CleverTap Account Passcode"
          --data "@payload"
          "https://api.clevertap.com/1/targets/create.json"
 
@@ -178,11 +178,11 @@ Endpoint: https://api.clevertap.com/1/targets/create.json
 
 ##### From Cloud Code
 
-If you are running your own instance of [parse-server](https://github.com/ParsePlatform/parse-server), you can use the CleverTap Node.js module to send push notifications.  Please [see our fork of the parse-server-example server](https://github.com/CleverTap/parse-server-example) for more details and usage. 
+If you are running your own instance of [parse-server](https://github.com/ParsePlatform/parse-server), you can use the [CleverTap Node.js module](https://github.com/CleverTap/clevertap-node) to send push notifications from your parse-server.  Please [see our fork of the parse-server-example server](https://github.com/CleverTap/parse-server-example) for more details and usage. 
 
-* Install the CleverTap Node module: `npm install --save clevertap`
+* install the CleverTap Node module: `npm install --save clevertap`
 
-* Add your CleverTap Account ID and CleverTap Account Passcode as environment variables (CLEVERTAP_ACCOUNT_ID and CLEVERTAP_ACCOUNT_PASSCODE, respectively).  
+* add your CleverTap Account ID and CleverTap Account Passcode (you can find these in [CleverTap Dashboard->Settings](https://dashboard.clevertap.com/x/settings.html) as environment variables (CLEVERTAP_ACCOUNT_ID and CLEVERTAP_ACCOUNT_PASSCODE, respectively).  
 
 You can then enable CleverTap in your Cloud Code ([see our example cloud/main.js implementation](https://github.com/CleverTap/parse-server-example/blob/master/cloud/main.js)) to send push like this, for example:
 
@@ -193,9 +193,8 @@ const clevertap = CleverTap.init(process.env.CLEVERTAP_ACCOUNT_ID, process.env.C
 Parse.Cloud.define('push', function(req, res) {
     
     /**
-     * Send an immediate push to users subscribed to the specified channels
-     * Callable from the Parse SDK Cloud Code methods
-     */
+    * Send an immediate push to users subscribed to the specified channels
+    */
 
     const channels = req.params.channels;
 
@@ -229,7 +228,6 @@ Parse.Cloud.afterSave('GameScore', function(req) {
      * Send all users an immediate push notifiying them of a new Game Score. 
      *
      */
-
     const gameScore = req.object;
     const body = (gameScore) ? `New Game Score: ${gameScore.get("playerName")} ${gameScore.get("score")}` : "New Game Score";
     const payload = {
