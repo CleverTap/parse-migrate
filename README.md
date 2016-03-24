@@ -174,7 +174,6 @@ Endpoint: https://api.clevertap.com/1/targets/create.json
     }
 }
 ```
-[
 
 ##### From Cloud Code
 
