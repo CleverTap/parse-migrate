@@ -39,7 +39,7 @@ With a successful matching, your current user channels and other custom profile 
 
 The default with Parse was to collect Android GCM tokens using the Parse GCM Sender Id.  As a result, those tokens will no longer work (when you switch to a new provider or Parse ceases operations).  If you do not have tokens generated with your own GCM Sender Id, our suggestion is to run CleverTap and Parse side by side in your app for a reasonable time period during which you can generate new tokens using your own GCM Sender Id.   
 
-The easiest way to run CleverTap side by side with Parse temporarily is to declare both the Parse and CleverTap broadcast receivers to your AndroidManifest.xml:
+The easiest way to run CleverTap side by side with Parse temporarily is to declare both the Parse and CleverTap broadcast receivers in your AndroidManifest.xml:
 
 ```xml
 
