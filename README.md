@@ -39,7 +39,38 @@ With a successful matching, your current user channels and other custom profile 
 
 The default with Parse was to collect Android GCM tokens using the Parse GCM Sender Id.  As a result, those tokens will no longer work (when you switch to a new provider or Parse ceases operations).  If you do not have tokens generated with your own GCM Sender Id, our suggestion is to run CleverTap and Parse side by side in your app for a reasonable time period during which you can generate new tokens using your own GCM Sender Id.   
 
-Please refer to our [Android Push Notification guide](https://support.clevertap.com/integration/android-sdk/#handling-multiple-push-notification-providers) for more information.
+The easiest way to run CleverTap side by side with Parse temporarily is to declare both the Parse and CleverTap broadcast receivers to your AndroidManifest.xml:
+
+```xml
+
+<meta-data
+    android:name="GCM_SENDER_ID"
+    android:value="id:${appGCMSenderId}"/>
+
+<meta-data android:name="com.parse.push.gcm_sender_id"
+    android:value="id:${appGCMSenderId}" />;
+
+<receiver android:name="com.parse.GcmBroadcastReceiver"
+    android:permission="com.google.android.c2dm.permission.SEND">
+    <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+        <category android:name="${appGcmPackage}" />
+    </intent-filter>
+</receiver>
+
+<receiver
+    android:name="com.clevertap.android.sdk.GcmBroadcastReceiver"
+    android:permission="com.google.android.c2dm.permission.SEND">
+    <intent-filter>
+        <action
+            android:name="com.google.android.c2dm.intent.RECEIVE"/>
+        <action
+            android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+        <category android:name="${appGcmPackage}"/>
+    </intent-filter>
+</receiver>
+```
 
 #### Managing Channels
 
@@ -244,4 +275,47 @@ Parse.Cloud.afterSave('GameScore', function(req) {
         console.log(r);
     });
 });
+```
+
+
+#### Accessing Push Notification Payloads
+You can access your custom key:value pairs like this:
+
+##### Android
+```java
+Intent launchIntent = getIntent();
+String value = intent.getStringExtra("myCustomKey");
+```
+You can also specify an object as a custom value.  In that case:
+```java
+ try {
+    Intent launchIntent = getIntent();
+    String value = intent.getStringExtra("myCustomKey");
+    JSONObject valueObject = new JSONObject(value);
+} catch (JSONException exception) {
+}
+```
+
+##### iOS
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+     NSString *value = [userInfo objectForKey:@"myCustomKey"];
+}
+```
+
+You can also specify an object as a custom value.  In that case:
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSString *value = [userInfo objectForKey:@"myCustomKey"];
+    if (value && [value isKindOfClass:[NSString class]]) {
+        NSData *_data = [value dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSError *error;
+        NSDictionary *valueDict = [NSJSONSerialization JSONObjectWithData:_data options:0 error:&error];
+        
+        if (error) {
+            valueDict = nil;
+        }
+    }
+}
 ```
